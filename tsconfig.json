@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "NodeNext",
+      "sourceMap": true,  // 关键：启用源映射
+      "outDir": "./dist", // 可选：指定输出目录
+      "esModuleInterop": true
+    }
+}
