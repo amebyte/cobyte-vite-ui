@@ -2,7 +2,7 @@
   "name": "cobyte-vite-ui",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "module": "/dist/index.mjs",
   "scripts": {
     "build": "vite build"
   },

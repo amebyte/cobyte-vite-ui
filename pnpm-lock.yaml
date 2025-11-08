@@ -30,6 +30,9 @@ importers:
 
   play:
     dependencies:
+      cobyte-vite-ui:
+        specifier: link:..
+        version: link:..
       vue:
         specifier: ^3.5.22
         version: 3.5.23(typescript@5.9.3)

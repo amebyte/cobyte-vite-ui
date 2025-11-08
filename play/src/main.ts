@@ -1,5 +1,8 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
+import CobyteViteUI from 'cobyte-vite-ui'
+import 'cobyte-vite-ui/dist/style.css'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(CobyteViteUI)
+app.mount('#app')
