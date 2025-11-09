@@ -11,7 +11,7 @@ export function camelCase(str: string) {
 export function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
-// 将驼峰命名的字符串转换为短横线分隔的字符串（即kebab-case）
+
 export function kebabCase(key: string) {
     const result = key.replace(/([A-Z])/g, ' $1').trim()
     return result.split(' ').join('-').toLowerCase()
@@ -88,14 +88,12 @@ export function stringifyComponentImport({ as: name, from: path, name: importNam
                 const name = pascalCase(rawName)
                 // 只处理 Co 开头的组件
                 if (!name.match(/^Co[A-Z]/)) return
-                // 组件路径转换
-                const partialName = kebabCase(name.slice(2))
                 // 定义要替换的变量名（这里暂时编码为 CoButton）
                 const varName = name
                 // 在代码开头添加导入语句：
                 // 1. 导入 CoButton 组件
                 // 2. 导入样式文件
-                s.prepend(`\nimport ${varName} from 'cobyte-vite-ui/dist/components/${partialName}';\nimport 'cobyte-vite-ui/dist/style.css';\n`)
+                s.prepend(`\nimport ${varName} from 'cobyte-vite-ui/dist/components/button';\nimport 'cobyte-vite-ui/dist/style.css';\n`)
   
                 // 执行替换：将 resolveComponent("xxx") 调用替换为组件变量名
                 replace(varName)
