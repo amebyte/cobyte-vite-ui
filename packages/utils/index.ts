@@ -17,6 +17,7 @@ export function kebabCase(key: string) {
     return result.split(' ').join('-').toLowerCase()
 }
 
+// 根据传入的信息生成对应的导入语句字符串
 export function stringifyImport(info) {
     if (typeof info === 'string')
       return `import '${info}'`
@@ -27,18 +28,20 @@ export function stringifyImport(info) {
     else
       return `import ${info.as} from '${info.from}'`
 }
-
+// 根据组件的导入信息生成完整的导入语句，包括组件本身的导入和其副作用（如样式文件）的导入。
 export function stringifyComponentImport({ as: name, from: path, name: importName, sideEffects }) {
     const imports = [
+      // 生成组件导入语句
       stringifyImport({ as: name, from: path, name: importName }),
     ]
   
     if (sideEffects) {
+      // 生成副作用导入语句
       sideEffects.forEach(i => imports.push(stringifyImport(i)))
     }
   
     return imports.join(';')
-  }
+}
 
   export default function VitePluginAutoComponents() {
     return {
@@ -81,7 +84,7 @@ export function stringifyComponentImport({ as: name, from: path, name: importNam
                     })
                 }
             }
-  
+            let no = 0
             // 遍历所有匹配结果进行处理
             for (const { rawName, replace } of results) {
                 // 将字符串转换为大驼峰
@@ -90,13 +93,23 @@ export function stringifyComponentImport({ as: name, from: path, name: importNam
                 if (!name.match(/^Co[A-Z]/)) return
                 // 组件路径转换
                 const partialName = kebabCase(name.slice(2))
+                // 封装了组件的完整导入信息，作为数据载体传递给后续处理函数
+                const component = {
+                    name,
+                    from: `cobyte-vite-ui/dist/components/${partialName}`,
+                    sideEffects: ['cobyte-vite-ui/dist/style.css']
+                }
                 // 定义要替换的变量名（这里暂时编码为 CoButton）
-                const varName = name
+                // const varName = name
+                // 使用特殊前缀减少与用户变量的冲突，以及使用递增的序号，保证唯一性，避免变量名冲突
+                const varName = `__unplugin_components_${no}`
                 // 在代码开头添加导入语句：
                 // 1. 导入 CoButton 组件
                 // 2. 导入样式文件
-                s.prepend(`\nimport ${varName} from 'cobyte-vite-ui/dist/components/${partialName}';\nimport 'cobyte-vite-ui/dist/style.css';\n`)
-  
+                // s.prepend(`\nimport ${varName} from 'cobyte-vite-ui/dist/components/${partialName}';\nimport 'cobyte-vite-ui/dist/style.css';\n`)
+                // 这里将 component 对象展开，并添加 as: varName 参数，形成完整的导入配置
+                s.prepend(`${stringifyComponentImport({ ...component, as: varName })};\n`)
+                no += 1
                 // 执行替换：将 resolveComponent("xxx") 调用替换为组件变量名
                 replace(varName)
             }
