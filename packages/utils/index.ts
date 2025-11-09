@@ -11,9 +11,9 @@ export function capitalize(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export default function myPlugin() {
+export default function VitePluginAutoComponents() {
     return {
-      name: 'vite-plugin-auto-component',
+      name: 'vite-plugin-auto-components',
   
       transform(code, id) {
         // 非.vue文件不处理
@@ -33,10 +33,8 @@ export default function myPlugin() {
             }
 
             for (const { rawName, replace } of results) {
-                // const name = pascalCase(rawName)
-   
                 const varName = `CoButton`
-                s.prepend(`import CoButton from 'cobyte-vite-ui/dist/components/button';\nimport 'cobyte-vite-ui/dist/style.css';\n`)
+                s.prepend(`\nimport CoButton from 'cobyte-vite-ui/dist/components/button';\nimport 'cobyte-vite-ui/dist/style.css';\n`)
 
                 replace(varName)
             }
