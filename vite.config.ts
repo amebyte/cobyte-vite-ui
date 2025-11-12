@@ -31,6 +31,7 @@ export default defineConfig(({ command, mode }) => {
             vue(),
         ],
         build: {
+            minify: false, // 禁止压缩混淆
             lib: {
                 entry: entryArr,
                 formats: ["es"], // 只构建 ES 模块

@@ -1,5 +1,7 @@
 <template>
-    <button>测试按钮</button>
+  <n-button type="warning">
+    Warning
+  </n-button>
 </template>
 <script setup lang="ts">
 defineOptions({

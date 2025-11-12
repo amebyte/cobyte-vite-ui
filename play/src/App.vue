@@ -5,4 +5,5 @@
 
 <template>
   <co-button></co-button>
+  <n-button type="primary">naive-ui</n-button>
 </template>

@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "cobyte-vite-ui": "link:..",
+    "cobyte-vite-ui": "^1.0.0",
+    "naive-ui": "^2.43.1",
     "vue": "^3.5.22"
   },
   "devDependencies": {
@@ -17,6 +18,7 @@
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.8.1",
     "typescript": "~5.9.3",
+    "unplugin-vue-components": "^30.0.0",
     "vite": "^7.1.7",
     "vue-tsc": "^3.1.0"
   }

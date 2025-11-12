@@ -61,6 +61,22 @@ export function CobyteViteUiResolver() {
   }
 }
 
+/**
+ * Resolver for Naive UI
+ *
+ * @link https://www.naiveui.com/
+ */
+export function NaiveUiResolver() {
+  return {
+    type: 'component',
+    resolve: (name: string) => {
+      console.log('NaiveUiResolver', name, name.match(/^(N[A-Z]|n-[a-z])/));
+      if (name.match(/^(N[A-Z]|n-[a-z])/))
+        return { name, from: 'naive-ui' }
+    },
+  }
+}
+
 export class Context {
   options: any;
   private _componentNameMap = {} // 组件缓存
