@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path, { resolve } from "path";
 import fs from "fs";
+import AutoComponents from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 // 动态获取组件目录列表
 const componentsDir = resolve(__dirname, "./packages/components");
@@ -29,6 +31,9 @@ export default defineConfig(({ command, mode }) => {
     return {
         plugins: [
             vue(),
+            AutoComponents({
+                resolvers: [NaiveUiResolver()]
+            })
         ],
         build: {
             minify: false, // 禁止压缩混淆
@@ -40,6 +45,7 @@ export default defineConfig(({ command, mode }) => {
             rollupOptions: {
                 external: [
                     "vue",
+                    "naive-ui",
                 ],
                 output: {
                     format: "es",

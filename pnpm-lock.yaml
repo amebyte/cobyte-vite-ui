@@ -27,6 +27,9 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      unplugin-vue-components:
+        specifier: ^30.0.0
+        version: 30.0.0(@babel/parser@7.28.5)(vue@3.5.23(typescript@5.9.3))
       vite:
         specifier: ^7.2.1
         version: 7.2.1(@types/node@24.10.0)(sass@1.93.3)
