@@ -5,7 +5,7 @@ import fs from "fs";
 import AutoComponents from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
-// 动态获取组件目录列表
+// 这段代码的目的是动态获取指定目录下的所有子目录名称，过滤掉文件，只保留目录
 const componentsDir = resolve(__dirname, "./packages/components");
 const modules = fs.readdirSync(componentsDir).filter((name) => {
     const fullPath = path.join(componentsDir, name);
