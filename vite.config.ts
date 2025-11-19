@@ -9,6 +9,8 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 const componentsDir = resolve(__dirname, "./packages/components");
 const modules = fs.readdirSync(componentsDir).filter((name) => {
     const fullPath = path.join(componentsDir, name);
+    // fs.statSync(fullPath): 获取文件/目录的状态信息
+    // .isDirectory(): 检查是否为目录（返回 boolean）
     // 只获取目录，排除文件
     return fs.statSync(fullPath).isDirectory();
 });
